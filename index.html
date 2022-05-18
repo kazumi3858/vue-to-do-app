@@ -12,22 +12,23 @@
 <body>
   <div id="app">
     <h1>To Do List</h1>
-    <form>
+    <form @submit.prevent>
       <textarea v-model="newContent"></textarea>
       <button @click="addContent">Create</button>
     </form>
-    <p>{{ newContent }}</p>
     <ul>
       <li v-for="(content, index) in contents" :key="index">
-        <div v-show="!content.editAction">
-          {{ index }} {{ content.text }}
+        <div v-show="!content.editMode">
+          {{ content.text }}
           <button @click="removeContent(index)">Delete</button>
           <button @click="changeEditMode(index)">Edit</button>
         </div>
-        <div v-show="content.editAction">
-          <textarea v-model="content.text"></textarea>
-          <button @click="changeEditMode(index)">Cancel</button>
-          <button @click="saveUpdatedContents(index)">Update</button>
+        <div v-show="content.editMode">
+          <form @submit.prevent>
+            <textarea v-model="content.text"></textarea>
+            <button @click="changeEditMode(index)">Cancel</button>
+            <button @click="saveUpdatedContents(index)">Update</button>
+          </form>
         </div>
       </li>
     </ul>
