@@ -18,10 +18,17 @@
     </form>
     <p>{{ newContent }}</p>
     <ul>
-      <li v-for="(content, index) in contents" :key="content">
-        {{ index }} {{ content }}
-        <button @click="removeContent(index)">Delete</button>
-        <button>Edit</button>
+      <li v-for="(content, index) in contents" :key="index">
+        <div v-show="!content.editAction">
+          {{ index }} {{ content.text }}
+          <button @click="removeContent(index)">Delete</button>
+          <button @click="changeEditMode(index)">Edit</button>
+        </div>
+        <div v-show="content.editAction">
+          <textarea v-model="content.text"></textarea>
+          <button @click="changeEditMode(index)">Cancel</button>
+          <button @click="saveUpdatedContents(index)">Update</button>
+        </div>
       </li>
     </ul>
   </div>

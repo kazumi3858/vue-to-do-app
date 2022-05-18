@@ -2,7 +2,8 @@ const App = {
   data () {
     return {
       contents: [],
-      newContent: null
+      newContent: null,
+      editAction: false
     }
   },
   mounted () {
@@ -20,8 +21,9 @@ const App = {
       if (!this.newContent) {
         return
       }
-      this.contents.push(this.newContent)
-      this.newContent = ''
+      const content = { text: this.newContent, editAction: false }
+      this.contents.push(content)
+      //this.newContent = ''
       this.saveContents()
     },
     removeContent (index) {
@@ -32,8 +34,12 @@ const App = {
       const jsonContents = JSON.stringify(this.contents)
       localStorage.setItem('contents', jsonContents)
     },
-    editContent () {
-      
+    changeEditMode (index) {
+      this.contents[index].editAction = !this.contents[index].editAction
+    },
+    saveUpdatedContents (index) {
+      this.changeEditMode(index)
+      this.saveContents()
     }
   }
 }
