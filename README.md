@@ -1,2 +1,2 @@
 # vue-to-do-app
-Vue.js版ToDoアプリ
+Simple ToDo List.
