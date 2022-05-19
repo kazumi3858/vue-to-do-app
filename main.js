@@ -1,4 +1,4 @@
-import Vue from 'vue'
+/* global Vue, localStorage */
 
 const App = {
   data () {
@@ -19,7 +19,6 @@ const App = {
   },
   methods: {
     addContent () {
-      console.log('1')
       if (!this.newContent) {
         return
       }
@@ -29,27 +28,20 @@ const App = {
       this.saveContents()
     },
     removeContent (index) {
-      console.log('2')
       this.contents.splice(index, 1)
       this.saveContents()
     },
     saveContents () {
-      console.log('3')
       const jsonContents = JSON.stringify(this.contents)
       localStorage.setItem('contents', jsonContents)
     },
     changeEditMode (index) {
-      console.log('4')
       this.contents[index].editMode = !this.contents[index].editMode
     },
     saveUpdatedContents (index) {
-      console.log('5')
       this.changeEditMode(index)
       this.saveContents()
     }
-  },
-  computed: {
-
   }
 }
 
