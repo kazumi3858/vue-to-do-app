@@ -8,8 +8,8 @@ const App = {
       editingIndex: null
     }
   },
-  mounted () {
-    if (localStorage.getItem('contents')) {
+  created () {
+    if (localStorage.length > 0) {
       try {
         this.contents = JSON.parse(localStorage.getItem('contents'))
       } catch (e) {
