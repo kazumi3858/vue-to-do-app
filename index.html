@@ -22,16 +22,16 @@
     <div class="todo-list">
       <ul>
         <li v-for="(content, index) in contents" :key="index">
-          <div v-show="!content.editMode">
+          <div v-show="index !== editingIndex">
             {{ content.text }}
             <button @click="removeContent(index)">Delete</button>
-            <button @click="changeEditMode(index)">Edit</button>
+            <button @click="editingIndex = index">Edit</button>
           </div>
-          <div v-show="content.editMode">
+          <div v-show="index === editingIndex">
             <form @submit.prevent>
               <textarea v-model="content.text"></textarea>
-              <button @click="changeEditMode(index)">Cancel</button>
-              <button @click="saveUpdatedContents(index)">Update</button>
+              <button @click="editingIndex = null">Cancel</button>
+              <button @click="updateContents">Update</button>
             </form>
           </div>
         </li>
