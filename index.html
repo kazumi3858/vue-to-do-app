@@ -25,12 +25,12 @@
           <div v-show="index !== editingIndex">
             {{ content.text }}
             <button @click="removeContent(index)">Delete</button>
-            <button @click="editingIndex = index">Edit</button>
+            <button @click="setEditData(index)">Edit</button>
           </div>
           <div v-show="index === editingIndex">
             <form @submit.prevent>
               <textarea v-model="content.text"></textarea>
-              <button @click="editingIndex = null">Cancel</button>
+              <button @click="cancelEditing(index)">Cancel</button>
               <button @click="updateContents">Update</button>
             </form>
           </div>

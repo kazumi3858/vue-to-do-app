@@ -5,7 +5,8 @@ const App = {
     return {
       contents: [],
       newContent: null,
-      editingIndex: null
+      editingIndex: null,
+      editingContent: null
     }
   },
   created () {
@@ -35,9 +36,17 @@ const App = {
       const jsonContents = JSON.stringify(this.contents)
       localStorage.setItem('contents', jsonContents)
     },
+    setEditData (index) {
+      this.editingIndex = index
+      this.editingContent = this.contents[index].text
+    },
     updateContents () {
       this.saveContents()
       this.editingIndex = null
+    },
+    cancelEditing (index) {
+      this.editingIndex = null
+      this.contents[index].text = this.editingContent
     }
   }
 }
