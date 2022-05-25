@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo List</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div class="main-form">
+      <h1>ToDo List</h1>
+      <form @submit.prevent>
+        <textarea v-model="newContent"></textarea>
+        <button @click="addContent">Create</button>
+      </form>
+    </div>
+    <div class="todo-list">
+      <ul>
+        <li v-for="(content, index) in contents" :key="index">
+          <div v-show="index !== editingIndex">
+            {{ content.text }}
+            <button @click="removeContent(index)">Delete</button>
+            <button @click="setEditData(index)">Edit</button>
+          </div>
+          <div v-show="index === editingIndex">
+            <form @submit.prevent>
+              <textarea v-model="content.text"></textarea>
+              <button @click="cancelEditing(index)">Cancel</button>
+              <button @click="updateContents">Update</button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
